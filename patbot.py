@@ -7,6 +7,7 @@ Created on Thu Feb 11 11:03:02 2021
 
 import os
 from discord.ext import commands
+from discord.utils import get
 import discord
 from dotenv import load_dotenv
 import random
@@ -15,6 +16,8 @@ import requests
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
+PATID_DISC = 331046481798758400
+MWID_DISC = 330516055153704960
 def auth():
     return os.getenv('BEARER_TOKEN')
 
@@ -58,6 +61,14 @@ async def on_ready():
 # @bot.command(name='help',help = 'Displays all available commands')
 # async def help(ctx):
 #     return
+@bot.event
+async def on_message(message):
+    author = message.author
+    if author.id == MWID_DISC:
+        await bot.send_message(message.channel, f"Aight {author}")
+        emoji = get(bot.get_all_emojis(), name='pat')
+        await bot.add_reaction(message,emoji)
+
 @bot.command(name='song',help = 'Plays a random Pat song')
 async def song(ctx):
     songs = ['kumbaya','ed sheeran rap','firework katy perry','big time rush by big time rush (album = btr)' ]
