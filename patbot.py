@@ -11,8 +11,7 @@ import discord
 from dotenv import load_dotenv
 import random
 import requests
-import json
-import threading
+
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -32,14 +31,14 @@ def create_url():
     url = "https://api.twitter.com/2/tweets/search/recent?query={}&{}".format(
         query, tweet_fields
     )
-    print(url)
+    #print(url)
     return url
 def create_headers(bearer_token):
     headers = {"Authorization": "Bearer {}".format(bearer_token)}
     return headers
 def connect_to_endpoint(url, headers):
     response = requests.request("GET", url, headers=headers)
-    print(response.status_code)
+    #print(response.status_code)
     if response.status_code != 200:
         raise Exception(response.status_code, response.text)
     return response.json()
@@ -66,7 +65,7 @@ async def song(ctx):
     await ctx.send(response)
 @bot.command(name='arushi',help='...')
 async def arushi(ctx):
-    await ctx.send('Come one guys, I already told you we\'re just friends')
+    await ctx.send('Come on guys, I already told you we\'re just friends')
 @bot.command(name = 'tweet',help='Displays Pat\'s most recent twitter activity.')
 async def tweet(ctx):
     tweet = 'https://www.twitter.com/askpat13/status/' + str(getID())
