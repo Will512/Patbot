@@ -54,6 +54,7 @@ def getID():
     return ret
 
 bot = commands.Bot(command_prefix='?askpat ')
+client = discord.client()
 @bot.event
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
@@ -61,13 +62,13 @@ async def on_ready():
 # @bot.command(name='help',help = 'Displays all available commands')
 # async def help(ctx):
 #     return
-@bot.event
+@client.event
 async def on_message(message):
     author = message.author
     if author.id == MWID_DISC:
-        await bot.send_message(message.channel, f"Aight {author}")
+        await client.send_message(message.channel, f"Aight {author}")
         emoji = get(bot.get_all_emojis(), name='pat')
-        await bot.add_reaction(message,emoji)
+        await client.add_reaction(message,emoji)
 
 @bot.command(name='song',help = 'Plays a random Pat song')
 async def song(ctx):
