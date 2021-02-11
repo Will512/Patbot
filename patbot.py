@@ -67,7 +67,7 @@ async def on_message(message):
     author = message.author
     if author.id == MWID_DISC:
         await client.send_message(message.channel, f"Aight {author}")
-        emoji = get(bot.get_all_emojis(), name='pat')
+        emoji = get(client.get_all_emojis(), name='pat')
         await client.add_reaction(message,emoji)
 
 @bot.command(name='song',help = 'Plays a random Pat song')
