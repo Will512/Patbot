@@ -20,6 +20,8 @@ PATID_DISC = 331046481798758400
 MWID_DISC = 330516055153704960
 
 
+PAT_EMOJI_ID = 809601308972548096
+
 def auth():
     return os.getenv('BEARER_TOKEN')
 
@@ -64,14 +66,18 @@ async def on_ready():
 # @bot.command(name='help',help = 'Displays all available commands')
 # async def help(ctx):
 #     return
-@client.event
+@bot.event()
 async def on_message(message):
-    print('yo')
+    await bot.process_commands(message)
     author = message.author
-    if author.id == MWID_DISC:
-        await client.send_message(message.channel, f"Aight {author}")
+    if(author==MWID_DISC or author== PATID_DISC):
+        await message.channel.send("I'm a sick fuck I like a quick Fuck WOO!")
         emoji = get(client.get_all_emojis(), name='pat')
-        await client.add_reaction(message,emoji)
+        await message.add_reaction(emoji)
+
+
+
+
 
 @bot.command(name='song',help = 'Plays a random Pat song')
 async def song(ctx):
@@ -96,4 +102,4 @@ async def pasta(ctx):
     response = random.choice(pastas)
     await ctx.send(response)
 bot.run(TOKEN)
-client.run(TOKEN)
+#client.run(TOKEN)
