@@ -18,6 +18,8 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 PATID_DISC = 331046481798758400
 MWID_DISC = 330516055153704960
+
+
 def auth():
     return os.getenv('BEARER_TOKEN')
 
@@ -54,7 +56,7 @@ def getID():
     return ret
 
 bot = commands.Bot(command_prefix='?askpat ')
-client = discord.client()
+client = discord.Client()
 @bot.event
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
@@ -64,6 +66,7 @@ async def on_ready():
 #     return
 @client.event
 async def on_message(message):
+    print('yo')
     author = message.author
     if author.id == MWID_DISC:
         await client.send_message(message.channel, f"Aight {author}")
@@ -93,3 +96,4 @@ async def pasta(ctx):
     response = random.choice(pastas)
     await ctx.send(response)
 bot.run(TOKEN)
+client.run(TOKEN)
