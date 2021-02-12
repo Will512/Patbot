@@ -66,17 +66,17 @@ async def on_ready():
 # @bot.command(name='help',help = 'Displays all available commands')
 # async def help(ctx):
 #     return
-@bot.event()
+@bot.event
+#@bot.event()
 async def on_message(message):
-    await bot.process_commands(message)
-    author = message.author
-    if(author==MWID_DISC or author== PATID_DISC):
-        await message.channel.send("I'm a sick fuck I like a quick Fuck WOO!")
-        emoji = get(client.get_all_emojis(), name='pat')
-        await message.add_reaction(emoji)
-
-
-
+    if(message.author != client.user):
+        await bot.process_commands(message)
+        author = message.author.id
+        #print(author)
+        if(author==MWID_DISC or author== PATID_DISC):
+            await message.channel.send("I'm a sick fuck I like a quick Fuck WOO!")
+            emoji = get(bot.get_all_emojis(), name='pat')
+            await message.add_reaction(emoji)
 
 
 @bot.command(name='song',help = 'Plays a random Pat song')
