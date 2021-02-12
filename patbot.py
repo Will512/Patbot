@@ -18,10 +18,11 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 PATID_DISC = 331046481798758400
 MWID_DISC = 330516055153704960
+WSID_DISC = 337440868669849600
 
 
-PAT_EMOJI_ID = 809601308972548096
-
+#PAT_EMOJI_ID = 809672961296433153
+PAT_EMOJI_ID =754023549483745402
 def auth():
     return os.getenv('BEARER_TOKEN')
 
@@ -63,6 +64,8 @@ client = discord.Client()
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="?askpat help"))
+    for emoji in bot.emojis:
+        print("Name:", emoji.name + ",", "ID:", emoji.id)
 # @bot.command(name='help',help = 'Displays all available commands')
 # async def help(ctx):
 #     return
@@ -73,9 +76,12 @@ async def on_message(message):
         await bot.process_commands(message)
         author = message.author.id
         #print(author)
-        if(author==MWID_DISC or author== PATID_DISC):
+        #if(author==MWID_DISC or author== PATID_DISC):
+        if(author== PATID_DISC or author==WSID_DISC):
             await message.channel.send("I'm a sick fuck I like a quick Fuck WOO!")
-            emoji = get(bot.get_all_emojis(), name='pat')
+            #emoji = get(bot.get_all_emojis(), name='pat')
+            #emoji = discord.ext.commands.Bot.get_emoji(id = PAT_EMOJI_ID)
+            emoji = bot.get_emoji(PAT_EMOJI_ID)
             await message.add_reaction(emoji)
 
 
