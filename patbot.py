@@ -5,16 +5,16 @@ Created on Thu Feb 11 11:03:02 2021
 @author: schmi
 """
 
-import os
+#import os
 from discord.ext import commands
-from discord.utils import get
+#from discord.utils import get
 import discord
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 import random
 import requests
 
 
-load_dotenv()
+#load_dotenv()
 #TOKEN = os.getenv('DISCORD_TOKEN')
 TOKEN = 'ODA5NDQ5MjY3Njk3MTU2MTA2.YCVQYA.6Fltu3XBr8syPiPqtlzENQ2NUc0'
 PATID_DISC = 331046481798758400
