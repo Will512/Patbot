@@ -6,4 +6,4 @@ setup(
     author='Will Schmidt',
     author_email='schmidt.will9@gmail.com',
     packages = ['Patbot'],
-    install_requires=['os','discord','dotenv','random','requests'])
+    install_requires=['discord','random','requests'])
