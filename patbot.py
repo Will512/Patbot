@@ -64,8 +64,8 @@ client = discord.Client()
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="?askpat help"))
-    for emoji in bot.emojis:
-        print("Name:", emoji.name + ",", "ID:", emoji.id)
+    #for emoji in bot.emojis:
+       # print("Name:", emoji.name + ",", "ID:", emoji.id)
 # @bot.command(name='help',help = 'Displays all available commands')
 # async def help(ctx):
 #     return
@@ -76,19 +76,19 @@ async def on_message(message):
         await bot.process_commands(message)
         author = message.author.id
         #print(author)
-        #if(author==MWID_DISC or author== PATID_DISC):
-        if(author== PATID_DISC or author==WSID_DISC):
-            await message.channel.send("I'm a sick fuck I like a quick Fuck WOO!")
+        if(author== PATID_DISC):
+        #if(author== PATID_DISC or author==WSID_DISC):
+            #await message.channel.send("I'm a sick fuck I like a quick Fuck WOO!")
             #emoji = get(bot.get_all_emojis(), name='pat')
             #emoji = discord.ext.commands.Bot.get_emoji(id = PAT_EMOJI_ID)
             emoji = bot.get_emoji(PAT_EMOJI_ID)
             await message.add_reaction(emoji)
-
+        
 
 @bot.command(name='song',help = 'Plays a random Pat song')
 async def song(ctx):
-    songs = ['kumbaya','ed sheeran rap','firework katy perry','big time rush by big time rush (album = btr)' ]
-    response = '-play ' + random.choice(songs)
+    songs = ['kumbaya','ed sheeran rap','firework katy perry','big time rush by big time rush (album = btr)','tame impala censored','baby shark' ]
+    response = '!play ' + random.choice(songs)
     await ctx.send(response)
 @bot.command(name='arushi',help='...')
 async def arushi(ctx):
@@ -104,7 +104,8 @@ async def pasta(ctx):
               "My name is AskPat13 and you may ask me about if I'm pat or if I'm actually 13, but truthfully I'm neither. I'm a winner, and always have been.  I've played this whole game with no monitor and one handed, naked in my dorm. Imagine what I can do clothed, two handed, and full strength.",
               "SPAM :kissing_cat: THIS :kissing_cat: CAT :kissing_cat: TO :kissing_cat: ASK :kissing_cat: PAT",
               "I’m telling you, askpat is as cracked as he is jacked. I saw him at a 7-11 the other day buying Monster and adult diapers. I asked him what the diapers were for and he said ”they contain my full power so I don’t completely shit on these kids“ then he aerialed out the door",
-              "People on this subreddit hate askpat13. The first question to ask: why? Why do you all hate him? The obvious answer: you didn't watch him in his prime."]
+              "People on this subreddit hate askpat13. The first question to ask: why? Why do you all hate him? The obvious answer: you didn't watch him in his prime.",
+              "I'm pro sandwich - askpat13"]
     response = random.choice(pastas)
     await ctx.send(response)
 bot.run(TOKEN)
