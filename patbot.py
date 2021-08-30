@@ -423,7 +423,8 @@ class Music(commands.Cog):
         """Shows the player's queue.
         You can optionally specify the page to show. Each page contains 10 elements.
         """
-
+      # yolo
+      
         if len(ctx.voice_state.songs) == 0:
             return await ctx.send('Empty queue.')
 
