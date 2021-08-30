@@ -25,7 +25,7 @@ client = discord.Client()
 @bot.event
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="?askpat help"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="?askpat MUSIC"))
     #for emoji in bot.emojis:
        # print("Name:", emoji.name + ",", "ID:", emoji.id)
 # @bot.command(name='help',help = 'Displays all available commands')
