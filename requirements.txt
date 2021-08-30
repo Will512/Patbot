@@ -4,7 +4,4 @@ dnspython==1.16.0
 async-timeout==3.0.1
 requests
 youtube_dl==2021.6.6
-asyncio
-functools
-itertools
-math
+
