@@ -12,6 +12,8 @@ import discord
 from dotenv import load_dotenv
 import random
 import requests
+import youtube_dl
+import os
 
 
 load_dotenv()
@@ -86,10 +88,36 @@ async def on_message(message):
 
 
 @bot.command(name='song',help = 'Plays a random Pat song')
-async def song(ctx):
-    songs = ['kumbaya','ed sheeran rap','firework katy perry','big time rush by big time rush (album = btr)' ]
-    response = '-play ' + random.choice(songs)
-    await ctx.send(response)
+async def song(ctx, url: str):
+    # songs = ['kumbaya','ed sheeran rap','firework katy perry','big time rush by big time rush (album = btr)' ]
+    # response = '-play ' + random.choice(songs)
+    # await ctx.send(response)
+    song_there = os.path.isfile("song.mp3")
+    try:
+        if song_there:
+            os.remove("song.mp3")
+    except PermissionError:
+        await ctx.send("Wait for the current playing music to end or use the 'stop' command")
+        return
+
+    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='General')
+    await voiceChannel.connect()
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+    }
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+    for file in os.listdir("./"):
+        if file.endswith(".mp3"):
+            os.rename(file, "song.mp3")
+    voice.play(discord.FFmpegPCMAudio("song.mp3"))
 @bot.command(name='arushi',help='...')
 async def arushi(ctx):
     await ctx.send('Come on guys, I already told you we\'re just friends')
@@ -107,5 +135,10 @@ async def pasta(ctx):
               "People on this subreddit hate askpat13. The first question to ask: why? Why do you all hate him? The obvious answer: you didn't watch him in his prime."]
     response = random.choice(pastas)
     await ctx.send(response)
+@bot.command(name="stop", "stops the mf audio")
+async def stop(ctx):
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    voice.stop()
+
 bot.run(TOKEN)
 #client.run(TOKEN)
